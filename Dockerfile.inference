@@ -3,7 +3,7 @@ FROM 727897471807.dkr.ecr.$REGION.amazonaws.com.cn/pytorch-inference:2.3.0-gpu-p
 RUN mkdir -p /opt/ml/code
 WORKDIR /opt/ml/code
 
-RUN git clone https://github.com/Codinghub-ZhuYu/ComfyUI-SageMaker-Async-inf.git /opt/ml/code
+RUN git clone https://github.com/Codinghub-ZhuYu/ComfyUI-BYOC-on-SageMaker.git /opt/ml/code
 RUN pip install -r requirements.txt
 
 RUN path='pwd'
