@@ -1,0 +1,16 @@
+ARG REGION
+FROM 727897471807.dkr.ecr.$REGION.amazonaws.com.cn/pytorch-inference:2.3.0-gpu-py311
+RUN mkdir -p /opt/ml/code
+WORKDIR /opt/ml/code
+
+RUN git clone https://github.com/Codinghub-ZhuYu/ComfyUI-SageMaker-Async-inf.git /opt/ml/code
+RUN pip install -r requirements.txt
+
+RUN path='pwd'
+RUN echo $path
+
+COPY serve /opt/ml/code
+COPY /ComfyUI-master/models/checkpoints/sd3_medium_incl_clips.safetensors /opt/ml/code/models/checkpoints/
+COPY /ComfyUI-master/models/vae/diffusion_pytorch_model.safetensors /opt/ml/code/models/vae/
+
+ENTRYPOINT ["python", "serve"]
